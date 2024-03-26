@@ -1,0 +1,86 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+// _______USER__________
+model User{
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  name String?
+  email String? @unique
+  emailVerified DateTime?
+  image String?
+  hashedPassword String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  favoriteIds String[] @db.ObjectId
+
+  // realtions
+  accounts Account[] //user can have multiple accounts
+  listings Listing[]
+  reservations Reservation[]
+}
+
+model Account{
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  userId String @db.ObjectId
+  type String
+  provider String
+  providerAccountId String
+  refreshAccountId String
+  refresh_token String? @db.String
+  access_token String? @db.String
+  expires_at Int?
+  token_type String?
+  scope String?
+  id_token String? @db.String
+  session_state String?
+
+  //relations
+  user User @relation(fields: [userId], references: [id], onDelete:Cascade)//creates relation with the user account model using the 'userID" field , and it refrences to the user model 'id' field, we are gonna store the id field into userId field // and delete gives the account record instruction in case the serten user deleted
+ 
+ @@unique([provider,providerAccountId]) //we need a uniq compination with these too fields
+ }
+
+ model Listing{
+    id String @id @default(auto()) @map("_id") @db.ObjectId
+    title String
+    description String
+    imageSrc String  // gonna be aim to the cloudinary CDN
+    createdAt DateTime @default(now())
+    cateogry String
+    roomCount Int
+    bathroomCount Int
+    guestCount Int
+    locationValue String
+    userId String @db.ObjectId
+    price Int
+
+    // relation
+    user User @relation(fields: [userId], references: [id], onDelete:Cascade)
+    reservations Reservation[]
+ }
+
+ model Reservation{
+     id String @id @default(auto()) @map("_id") @db.ObjectId
+     userId String @db.ObjectId
+     listingId String @db.ObjectId
+     startDate DateTime
+     endDate DateTime
+     totalPrice Int
+     createdAt DateTime @default(now())
+
+     // realtions (user, listing)
+    user User @relation(fields: [userId], references: [id], onDelete:Cascade)
+    listing Listing @relation(fields: [listingId], references: [id],onDelete:Cascade)
+ }

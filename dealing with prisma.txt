@@ -1,0 +1,26 @@
+______prisma____
+[1] installing 
+ npm i prisma
+
+[2]
+npx prisma init
+
+[3] push our models to the collection 
+npx prisma db push
+
+
+______@prisma/client____
+auto-generated query builder
+
+npm i @prisma/client
+
+
+
+____@next-auth/prisma-adapter______
+npm i @next-auth/prisma-adapter
+
+
+
+
+
+bcrypt  @types/bcrypt
