@@ -58,7 +58,7 @@ model Account{
     description String
     imageSrc String  // gonna be aim to the cloudinary CDN
     createdAt DateTime @default(now())
-    cateogry String
+    category String
     roomCount Int
     bathroomCount Int
     guestCount Int

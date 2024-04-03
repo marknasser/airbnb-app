@@ -22,16 +22,18 @@ export default async function getCurrentUser() {
       },
     });
 
+    console.log("zzzz", currentUser);
     if (!currentUser) {
       return null;
     }
-    console.log("zzzz", currentUser);
     // return currentUser;
     return {
       ...currentUser,
       createdAt: currentUser.createdAt.toISOString(),
-      updatedAt: currentUser.updatedAT.toISOString(),
+      updatedAt: currentUser.updatedAt.toISOString(),
       emailVerified: currentUser.emailVerified?.toISOString() || null,
     };
-  } catch (error: any) {}
+  } catch (error: any) {
+    console.log("error", error.message);
+  }
 }

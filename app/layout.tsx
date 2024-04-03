@@ -24,6 +24,8 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const currentUser = await getCurrentUser();
+
+  console.log("curr Layout", currentUser);
   return (
     <html lang="en">
       <body className={font.className}>
@@ -32,6 +34,7 @@ export default async function RootLayout({
         <RegisterModal />
         <RentModal />
         <Navbar currentUser={currentUser} />
+        <div className="pb-20 pt-28"></div>
         {children}
       </body>
     </html>
