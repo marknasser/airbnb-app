@@ -25,7 +25,6 @@ export default async function RootLayout({
 }>) {
   const currentUser = await getCurrentUser();
 
-  console.log("curr Layout", currentUser);
   return (
     <html lang="en">
       <body className={font.className}>
