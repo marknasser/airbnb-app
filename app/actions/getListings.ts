@@ -9,7 +9,12 @@ export async function getListings() {
     });
 
     // console.log(listings);
-    return listings;
+
+    const safeListings = listings.map((linsting) => ({
+      ...linsting,
+      createdAt: linsting.createdAt.toISOString(),
+    }));
+    return safeListings;
   } catch (error: any) {
     throw new Error(error);
   }
