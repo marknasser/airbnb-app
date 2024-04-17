@@ -8,7 +8,7 @@ export async function getListings() {
       orderBy: { createdAt: "desc" },
     });
 
-    console.log(listings);
+    // console.log(listings);
     return listings;
   } catch (error: any) {
     throw new Error(error);

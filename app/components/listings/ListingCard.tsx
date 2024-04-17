@@ -29,8 +29,6 @@ const ListingCard: React.FC<ListingCardProps> = ({
   reservation,
   disabled,
 }) => {
-  console.log(data);
-
   const router = useRouter();
   const { getByValue } = useCountries();
   const location = getByValue(data.locationValue);
