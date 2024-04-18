@@ -41,7 +41,7 @@ const Map: React.FC<MapProps> = ({ center }) => {
       {leafletLoaded && (
         <MapContainer
           center={(center as L.LatLngExpression) || [51, -0.09]}
-          zoom={center ? 10 : 9}
+          zoom={6}
           scrollWheelZoom={false}
           style={{ height: "100%", width: "100%" }}
         >
